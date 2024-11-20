@@ -8,7 +8,7 @@ public class SettingsForm extends JFrame {
     private JCheckBox visibilityCheckBox;
     private JPanel root;
     private final Map<String, JComponent> settingsConrolsMap = new HashMap<>();
-    SettingsManager settingsManager = SettingsManager.getInstance();
+    private final SettingsManager settingsManager = SettingsManager.getInstance();
 
     public SettingsForm() {
         setContentPane(root);
