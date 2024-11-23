@@ -6,15 +6,19 @@
 
 Класс представляющий собой основню форму приложения
 
-## SettingsForm.class _extends JFrame_
+## ![SettingsForm](https://img.shields.io/badge/SettingsForm-.class-gray?labelColor=blue&style=for-the-badge) extends ![SettingsForm](https://img.shields.io/badge/JFrame-blue?style=for-the-badge) 
 
-Класс представляющий собой форму для Настроек приложения
+![settingsManager: ](https://img.shields.io/badge/settingsManager:-SettingsManager-green?style=flat)  
+это поле хранящее объект управления настройками приложения.
 
-`settingsManager: SettingsManager` это поле хранящее объект управления настройками приложения.
-
+![settingsControlsMap: ](https://img.shields.io/badge/settingsControlsMap:-Map%3CString,%20JComponent%3E-green?style=flat)  
+это поле сопоставления названия параметра и отвечающего за него элемента интерфейса.
 `settingsControlsMap: Map<String, JComponent>` это поле сопоставления названия параметра и отвечающего за него элемента интерфейса.
-`settingsControlsMap: Map<String, JComponent>` это поле сопоставления названия параметра и отвечающего за него элемента интерфейса.
 
+![initChangeListeners](https://img.shields.io/badge/initChangeListeners-()-violet?style=flat)  
+Это функция  
+![initSettingsFromVault](https://img.shields.io/badge/initSettingsFromVault-()-violet?style=flat)  
+Это функция  
 
 ## SettingsManager.class (Singleton, Observer)
 
@@ -88,13 +92,13 @@ globalPrefs.putBoolean(key, value);
 
 ### Оповещение подписчиков об изменениях
 
-Поле `listeners: List<SettingsChangeListener>` представляет из себя список подписчиков, или же функций, которые надо
+![listeners: ](https://img.shields.io/badge/listeners:-List%3CSettingsChangeListener%3E-green?style=flat) представляет из себя список подписчиков, или же функций, которые надо
 вызвать при наступлении некоторого события.
 
-Функция `addSettingsChangeListener(listener: SettingsChangeListener)` добавлет переданый слушатель-подписчик в список
+![addSettingsChangeListener](https://img.shields.io/badge/addSettingsChangeListener-(listener:%20SettingsChangeListener)-violet?style=flat) добавлет переданый слушатель-подписчик в список
 подписчиков.
 
-Функция `notifySettingsChange(key: String)` оповещает всех подписчиков об изменении значения конретного ключа настроек.
+![notifySettingsChange](https://img.shields.io/badge/notifySettingsChange-(key:%20String)-violet?style=flat) оповещает всех подписчиков об изменении значения конретного ключа настроек.
 Эта функция **приватная** потому-что нет смысла её вызывать за пределами объекта класса. Эта функция доступна для вызова
 только в рамках описания внутреннего повдения объекта класса.  
 Для оповещения подписчиков об изменении параметра вызываем функцию `notifySettingsChange(key: String)` внутри всех
