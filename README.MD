@@ -2,25 +2,31 @@
 
 ![Изображение](Settings.png "Логотип Markdown")
 
-## MainForm.class _extends JFrame_ (Подписчик на изменение настроек)
+## ![MainForm](https://img.shields.io/badge/MainForm-.class-gray?labelColor=blue&style=for-the-badge) _extends JFrame_ (Подписчик на изменение настроек)
 
 Класс представляющий собой основню форму приложения
 
-## ![SettingsForm](https://img.shields.io/badge/SettingsForm-.class-gray?labelColor=blue&style=for-the-badge) extends ![SettingsForm](https://img.shields.io/badge/JFrame-blue?style=for-the-badge) 
+## ![SettingsForm](https://img.shields.io/badge/SettingsForm-.class-gray?labelColor=blue&style=for-the-badge) extends JFrame
 
 ![settingsManager: ](https://img.shields.io/badge/settingsManager:-SettingsManager-green?style=flat)  
-это поле хранящее объект управления настройками приложения.
+Это поле хранящее объект управления настройками приложения.
 
 ![settingsControlsMap: ](https://img.shields.io/badge/settingsControlsMap:-Map%3CString,%20JComponent%3E-green?style=flat)  
-это поле сопоставления названия параметра и отвечающего за него элемента интерфейса.
-`settingsControlsMap: Map<String, JComponent>` это поле сопоставления названия параметра и отвечающего за него элемента интерфейса.
+Это поле сопоставления названия параметра и отвечающего за него элемента
+интерфейса. Оно хранит пары ключ-значение, связывая тем самым один элемент пользовательского интерфейса и название
+параметра.
 
 ![initChangeListeners](https://img.shields.io/badge/initChangeListeners-()-violet?style=flat)  
-Это функция  
-![initSettingsFromVault](https://img.shields.io/badge/initSettingsFromVault-()-violet?style=flat)  
-Это функция  
+Эта функция должна каждому элементу интерфейса, отвечающему за параметр повесить слушатель изменения значения, что бы
+при изменении состяния элемента интерфейса это изменение сохранялось в настройки `settingsManager`. В процессе работы
+функция перебирает весь список `settingsControlsMap` и по каждому `JComponent` вызывает `addActionListener()`. В самом
+слушателе события изменения прописана строка, записывающая значение конкретного параметра в настройках, соответствующего
+этому элементу управления.  
 
-## SettingsManager.class (Singleton, Observer)
+![initSettingsFromVault](https://img.shields.io/badge/initSettingsFromVault-()-violet?style=flat)  
+Эта функция приводит состояние GUI элементов в соответствие настройкам, взятым из `settingsManager`
+
+## ![SettingsManager](https://img.shields.io/badge/SettingsManager-.class-gray?labelColor=blue&style=for-the-badge) (Singleton, Observer)
 
 ### Хранение основных настроек запущенного приложения.
 
@@ -28,7 +34,8 @@
 функции getInstance() мы можем получить доступ к единственному объекту этого класса из любого места программы
 строкой: `SettingsManager.getInstance()`
 
-![settings: ](https://img.shields.io/badge/settings:-Map%3CString,%20Object%3E-green?style=flat) это объект класса `HashSet<>` предствляющий из себя список пар "ключ -
+![settings: ](https://img.shields.io/badge/settings:-Map%3CString,%20Object%3E-green?style=flat)  
+Это объект класса `HashSet<>` предствляющий из себя список пар "ключ -
 значение", где ключ - это ыдуманное нами строковое название параметра настроек, а значение - это объект класса
 Object. При вызове конструктора класса поле `settings`, хранящее настройки инициализируется всеми
 параметрами по-умолчанию, так что бы все возможные параметры в приложении имели какое-либо
@@ -74,7 +81,7 @@ Windows.
 строк следующего вида:
 
 ```java
-    settings.put("label.show", globalPrefs.getBoolean("label.show", true));
+    settings.put("label.show",globalPrefs.getBoolean("label.show", true));
     /* FIXME: Одна и таже строка в виде аргумента двух разных функций, и разными они не будут.
     // Значит надо упростить как-то. Обернуть бы во что-нибудь.
     */
@@ -92,13 +99,15 @@ globalPrefs.putBoolean(key, value);
 
 ### Оповещение подписчиков об изменениях
 
-![listeners: ](https://img.shields.io/badge/listeners:-List%3CSettingsChangeListener%3E-green?style=flat) представляет из себя список подписчиков, или же функций, которые надо
+![listeners: ](https://img.shields.io/badge/listeners:-List%3CSettingsChangeListener%3E-green?style=flat)  
+Это поле представляет из себя список подписчиков, или же функций, которые надо
 вызвать при наступлении некоторого события.
 
-![addSettingsChangeListener](https://img.shields.io/badge/addSettingsChangeListener-(listener:%20SettingsChangeListener)-violet?style=flat) добавлет переданый слушатель-подписчик в список
-подписчиков.
+![addSettingsChangeListener](https://img.shields.io/badge/addSettingsChangeListener-(listener:%20SettingsChangeListener)-violet?style=flat)  
+Функция, которая добавлет один переданый слушатель-подписчик в список подписчиков.
 
-![notifySettingsChange](https://img.shields.io/badge/notifySettingsChange-(key:%20String)-violet?style=flat) оповещает всех подписчиков об изменении значения конретного ключа настроек.
+![notifySettingsChange](https://img.shields.io/badge/notifySettingsChange-(key:%20String)-violet?style=flat)  
+Эта фнункция оповещает всех подписчиков об изменении значения конретного ключа настроек.
 Эта функция **приватная** потому-что нет смысла её вызывать за пределами объекта класса. Эта функция доступна для вызова
 только в рамках описания внутреннего повдения объекта класса.  
 Для оповещения подписчиков об изменении параметра вызываем функцию `notifySettingsChange(key: String)` внутри всех
