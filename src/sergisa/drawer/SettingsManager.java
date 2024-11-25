@@ -34,6 +34,12 @@ public class SettingsManager {
         }
     }
 
+    public void put(String key, Object value) {
+        settings.put(key, value);
+        globalPrefs.put(key, value.toString());
+        notifySettingsChange(key);
+    }
+
     public void putBoolean(String key, boolean value) {
         settings.put(key, value);
         globalPrefs.putBoolean(key, value);
@@ -46,10 +52,8 @@ public class SettingsManager {
         notifySettingsChange(key);
     }
 
-    public void put(String key, Object value) {
-        settings.put(key, value);
-        globalPrefs.put(key, value.toString());
-        notifySettingsChange(key);
+    public Object get(String key) {
+        return settings.get(key);
     }
 
     public boolean getBoolean(String key) {
@@ -58,10 +62,6 @@ public class SettingsManager {
 
     public int getInt(String key) {
         return (int) settings.get(key);
-    }
-
-    public Object get(String key) {
-        return settings.get(key);
     }
 
     public interface SettingsChangeListener {
