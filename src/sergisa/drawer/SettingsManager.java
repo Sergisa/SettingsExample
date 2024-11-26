@@ -15,6 +15,7 @@ public class SettingsManager {
 
     private SettingsManager() {
         settings.put("label.show", globalPreferences.getBoolean("label.show", true));
+        settings.put("label.size", globalPreferences.getInt("label.size", 12));
     }
 
     public static SettingsManager getInstance() {

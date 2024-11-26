@@ -27,5 +27,6 @@ public class MainForm extends JFrame {
 
     private void initializeUI() {
         firstLabel.setVisible(settingsManager.getBoolean("label.show"));
+        firstLabel.setFont(firstLabel.getFont().deriveFont((float) settingsManager.getInt("label.size")));
     }
 }
