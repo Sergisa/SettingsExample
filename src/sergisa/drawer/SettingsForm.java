@@ -14,22 +14,14 @@ public class SettingsForm extends JFrame {
         setContentPane(root);
         setTitle("Настройки");
         setSize(400, 300);
-        settingsControlsMap.put("label.show", visibilityCheckBox);
-        initChangeListeners();
-        initSettingsFromVault();
+        chainControl("label.show", visibilityCheckBox);
     }
 
-    private void initChangeListeners() {
-        settingsControlsMap.forEach((settingKey, jComponent) -> {
-            ((JCheckBox) jComponent).addActionListener(e -> {
-                settingsManager.putBoolean(settingKey, ((JCheckBox) e.getSource()).isSelected());
-            });
+    private void chainControl(String key, JComponent control) {
+        settingsControlsMap.put(key, control);
+        ((JCheckBox) control).addActionListener(e -> {
+            settingsManager.put(key, ((JCheckBox) e.getSource()).isSelected());
         });
-    }
-
-    private void initSettingsFromVault() {
-        settingsControlsMap.forEach((settingKey, jComponent) -> {
-            ((JCheckBox) jComponent).setSelected(settingsManager.getBoolean(settingKey));
-        });
+        ((JCheckBox) control).setSelected(settingsManager.getBoolean(key));
     }
 }

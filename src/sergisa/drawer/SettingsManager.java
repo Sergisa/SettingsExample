@@ -11,10 +11,10 @@ public class SettingsManager {
     Map<String, Object> settings = new HashMap<>();
     private static SettingsManager instance;
     private final List<SettingsChangeListener> listeners = new ArrayList<>();
-    Preferences globalPrefs = Preferences.userNodeForPackage(getClass());
+    Preferences globalPreferences = Preferences.userNodeForPackage(getClass());
 
     private SettingsManager() {
-        settings.put("label.show", globalPrefs.getBoolean("label.show", true));
+        settings.put("label.show", globalPreferences.getBoolean("label.show", true));
     }
 
     public static SettingsManager getInstance() {
@@ -35,20 +35,16 @@ public class SettingsManager {
     }
 
     public void put(String key, Object value) {
+        if (value instanceof Boolean) {
+            globalPreferences.putBoolean(key, (Boolean) value);
+        } else if (value instanceof Integer) {
+            globalPreferences.putInt(key, (Integer) value);
+        } else if (value instanceof String) {
+            globalPreferences.put(key, (String)value);
+        } else {
+            globalPreferences.put(key, value.toString());
+        }
         settings.put(key, value);
-        globalPrefs.put(key, value.toString());
-        notifySettingsChange(key);
-    }
-
-    public void putBoolean(String key, boolean value) {
-        settings.put(key, value);
-        globalPrefs.putBoolean(key, value);
-        notifySettingsChange(key);
-    }
-
-    public void putInt(String key, int value) {
-        settings.put(key, value);
-        globalPrefs.putInt(key, value);
         notifySettingsChange(key);
     }
 
@@ -57,11 +53,11 @@ public class SettingsManager {
     }
 
     public boolean getBoolean(String key) {
-        return (boolean) settings.get(key);
+        return (boolean) get(key);
     }
 
     public int getInt(String key) {
-        return (int) settings.get(key);
+        return (int) get(key);
     }
 
     public interface SettingsChangeListener {
