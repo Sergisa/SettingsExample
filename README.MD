@@ -1,7 +1,7 @@
 # Форма с настройками
 
 ![Изображение](Settings.png "Диаграмма классов")
-![Изображение](Diagram_1.png "Диаграмма принципа работы")
+![Изображение](Diagram.png "Диаграмма принципа работы")
 
 ## ![MainForm](https://img.shields.io/badge/MainForm-.class-gray?labelColor=blue&style=for-the-badge) _extends JFrame_ (Подписчик на изменение настроек)
 
